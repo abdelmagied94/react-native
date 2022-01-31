@@ -41,7 +41,17 @@ public class ReactCookieJarContainer implements CookieJarContainer {
   @Override
   public List<Cookie> loadForRequest(HttpUrl url) {
     if (cookieJar != null) {
-      List<Cookie> cookies = cookieJar.loadForRequest(url);
+      List<Cookie> cookies;
+      try {
+        cookies = cookieJar.loadForRequest(url);
+      } catch (Exception ignored) {
+        // `IllegalArgumentException` can be thrown when building cookies
+        // `AndroidRuntimeException` if failed to load WebView provider: No WebView installed
+        // `AndroidRuntimeException` NameNotFoundException: com.google.android.webview
+        // `AndroidRuntimeException` MissingWebViewPackageException: Failed to verify WebView provider, version code is lower than expected: 451516600 actual: 35381100
+        return Collections.emptyList();
+      }
+
       ArrayList<Cookie> validatedCookies = new ArrayList<>();
       for (Cookie cookie : cookies) {
         try {
