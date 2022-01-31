@@ -64,9 +64,9 @@ function configureNext(
 
   // In Fabric, LayoutAnimations are unconditionally enabled for Android, and
   // conditionally enabled on iOS (pending fully shipping; this is a temporary state).
-  const FabricUIManager: FabricUIManagerSpec = global?.nativeFabricUIManager;
-  if (FabricUIManager?.configureNextLayoutAnimation) {
-    global?.nativeFabricUIManager?.configureNextLayoutAnimation(
+  const FabricUIManager: FabricUIManagerSpec = global && global.nativeFabricUIManager;
+  if (FabricUIManager && FabricUIManager.configureNextLayoutAnimation) {
+    FabricUIManager.configureNextLayoutAnimation(
       config,
       onAnimationComplete,
       onAnimationDidFail ??
@@ -78,7 +78,7 @@ function configureNext(
   // This will only run if Fabric is *not* installed.
   // If you have Fabric + non-Fabric running in the same VM, non-Fabric LayoutAnimations
   // will not work.
-  if (UIManager?.configureNextLayoutAnimation) {
+  if (UIManager && UIManager.configureNextLayoutAnimation) {
     UIManager.configureNextLayoutAnimation(
       config,
       onAnimationComplete ?? function() {},
