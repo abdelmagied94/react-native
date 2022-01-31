@@ -1226,7 +1226,6 @@ const ExportedForwardRef: React.AbstractComponent<
   {
     allowFontScaling = true,
     rejectResponderTermination = true,
-    underlineColorAndroid = 'transparent',
     ...restProps
   },
   forwardedRef: ReactRefSetter<
@@ -1237,7 +1236,6 @@ const ExportedForwardRef: React.AbstractComponent<
     <InternalTextInput
       allowFontScaling={allowFontScaling}
       rejectResponderTermination={rejectResponderTermination}
-      underlineColorAndroid={underlineColorAndroid}
       {...restProps}
       forwardedRef={forwardedRef}
     />
