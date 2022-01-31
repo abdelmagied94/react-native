@@ -97,11 +97,6 @@ public final class WebSocketModule extends NativeWebSocketModuleSpec {
 
     Request.Builder builder = new Request.Builder().tag(id).url(url);
 
-    String cookie = getCookie(url);
-    if (cookie != null) {
-      builder.addHeader("Cookie", cookie);
-    }
-
     boolean hasOriginHeader = false;
 
     if (options != null
