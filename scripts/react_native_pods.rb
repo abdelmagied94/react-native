@@ -137,6 +137,10 @@ def exclude_architectures(installer)
   # Hermes does not support `i386` architecture
   excluded_archs_default = has_pod(installer, 'hermes-engine') ? "i386" : ""
 
+  if excluded_archs_default == ""
+    return
+  end
+
   projects.each do |project|
     project.build_configurations.each do |config|
       config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = excluded_archs_default
